@@ -180,7 +180,7 @@ function Header() {
                                                     style={{ margin: "0" }}
                                                 />
                                             </li>
-                                            <NavLink to="/singup">
+                                            <NavLink to="/Signup">
                                                 <li className="li-singup">
                                                     Đăng ký
                                                 </li>

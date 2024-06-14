@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Filterproduct.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { findProductsByCategory, findProductsByDealhotId } from "../../../State/Product/Action";
+import { findAllProducts, findProductsByCategory, findProductsByDealhotId } from "../../../State/Product/Action";
 import { searchProductsBySoldAt } from "../../../State/Product/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +18,7 @@ const Filterproduct = () => {
   const { products } = useSelector((store) => store);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 16;
+  const [soldAtHandled, setSoldAtHandled] = useState(false);
 
   useEffect(() => {
     const categoryRequest = {
@@ -26,14 +27,22 @@ const Filterproduct = () => {
     const dealhotRequest = {
       dealhotId: param.dealhotId,
     };
-
-    dispatch(findProductsByCategory(categoryRequest)); 
+    if (categoryRequest.category) {
+      dispatch(findProductsByCategory(categoryRequest));
+    } else if (dealhotRequest.dealhotId){
     dispatch(findProductsByDealhotId(dealhotRequest)); 
+
+    } else if (!soldAtHandled ) {
+      dispatch(findAllProducts());
+      
+    }
   }, [dispatch, param.lavelThree, param.dealhotId]);
   const handleSoldAt = (soldAt) => {
     dispatch(searchProductsBySoldAt(soldAt));
+    setSoldAtHandled(true);
     navigate("/filterproduct");
   };
+ 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
     window.scrollTo(0, 0);

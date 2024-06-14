@@ -325,6 +325,7 @@ main {
 .select-country ul {
     display: flex;
     align-items: center;
+    margin-top: 20px;
 }
 .select-country ul li a {
     text-decoration: none;

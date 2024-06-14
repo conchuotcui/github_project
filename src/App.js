@@ -66,6 +66,7 @@ function App() {
           <Route path="/Thanhtoandathang" element={<Thanhtoandathang />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
+          
           <Route path="/MoreUser" element={<MoreUser />} />
           <Route path="/DetailOrderItem" element={<DetailOrderItem />} />
           <Route path="/AddDealhot/:dealhotId/:brandId" element={<AddDealhot />} />
